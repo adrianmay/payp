@@ -9,14 +9,14 @@ OBJS := $(addsuffix .o,$(basename $(SRCS)))
 CPPFLAGS ?= $(INC_FLAGS) -g -O0
 LDFLAGS ?= -L/usr/local/lib -lasyncd -lqlibc -pthread -levent -levent_pthreads -lssl -lcrypto -levent_openssl -lmicrohttpd
 
-REPS=200
+REPS=2000
 
 all:	res plot.gnu
 	gnuplot -p plot.gnu
 	gnuplot -p hist.gnu
 
 res:	$(TARGET)
-	rm -f theheap; ./$(TARGET) $(REPS) | tee res
+	rm -f theheap; ./$(TARGET) | tee res
 
 $(TARGET): $(OBJS)
 	$(CC)  -o $@  $(OBJS) $(LDFLAGS)

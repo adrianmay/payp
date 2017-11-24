@@ -6,15 +6,16 @@
 
 // #define TESTING 1
 
-int maxIterations=0, iteration=0;
+int maxIterations=MAX_ITERATIONS, iteration=0;
 
 static void show() { 
-	printf("%d %d %f %f\n", iteration, WORLD->numAnimals, 
-			WORLD->avgBal, WORLD->avgProbRepro ); 
+	printf("%d %d %f %f %f %f\n", iteration, WORLD->numAnimals, WORLD->avgBal, 
+			WORLD->avgProbReproK0, WORLD->avgProbReproK1, WORLD->avgProbReproK2  ); 
 }
 
-static void showProbRepro(ListedAnimal * la, void * fp) {
-	fprintf((FILE*)fp, "%f\n", la->pItem->code.probRepro);
+static int showProbRepro(ListedAnimal * la, void * fp) {
+	fprintf((FILE*)fp, "%f\n", la->pItem->code.probReproK0);
+	return 0;
 }
 
 static void shown() { 
@@ -25,9 +26,6 @@ static void shown() {
 
 
 int main(int argc, char ** argv) {
-#ifdef TESTING
-	return testPalloc();
-#else
 	if (argc==2)
 		maxIterations = atoi(argv[1]);
 	openHeap();
@@ -42,7 +40,6 @@ int main(int argc, char ** argv) {
 	//unitWeb();
 	closeHeap();
 	return 0;
-#endif
 }
 
 

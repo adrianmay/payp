@@ -8,6 +8,7 @@
 #define TRACE(params)
 #endif 
 
+#define MAX_ITERATIONS 10000
 #define FEE_REPRO 10.0
 #define FEE_TURN 0.003
 #define RENTLESS_POP 100
@@ -18,6 +19,9 @@
 #define POP_INIT 100
 #define BAL_INIT 100
 #define PROB_ACCIDENT 0.05
+#define PASSOVER_POP 100
+#define PASSOVER_FREQ 100
+#define PASSOVER_RATE 0.90
 
 #define DECLARE_LISTED(CLS) \
 typedef struct Listed ## CLS { \

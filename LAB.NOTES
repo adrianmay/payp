@@ -2,3 +2,10 @@ AT GIT COMMIT fdb8998bbb7d54ba413b7749ac38369780111c34 ...
 
 Very simple animals: only characteristic is "randiness", i.e., tendency to reproduce. Reproduction costs a flat fee and then divides the remainder equally between parent and child. It's hard coded that animals are more likely to reproduce when rich, and that memory prices are higher when the population is higher. The result is a reasonably stable population level and a randiness that evolves toward an optimum from a wide range of starting values.
 
+AT GIT COMMIT 91c93b4059cc961c7fbb00e4f681c880a52aed95 ...
+
+Here the repro probability has been made a constant evolving property of an animal instead of being a linear function of the wealth with evolving constant of proportionality. The effect is that while the population and therefore the rent is low, the repro rate evolves higher, and then when the rent is too higher the repro rate must evolve back down again. This demonstrates the obvious fact that reproduction in poverty is unwise. It will be fun to let a polynomial evolve for this and look at its form.
+
+AT GIT TAG Expt-003
+
+Now allowed prob of reproduction to be a quadratic in wealth. The constant and linear terms evolved to zero and the quadratic term stabilised. This figures because it wants to be a step function.
