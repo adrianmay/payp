@@ -4,7 +4,7 @@
 
 int shouldquit=0;
 
-static float mutateProbRepro(float prob) {
+static double mutateProbRepro(double prob) {
 	return prob + randNorm(0, prob*MUTERATE_PROBREPRO);
 }
 
@@ -29,7 +29,7 @@ static void reproduce(ListedAnimal * predecessor) {
 	TRACE( ("Reproduce\n") )
 	ListedAnimal * listedparent = predecessor->pNext;
 	Animal * parent = listedparent->pItem;
-	float oldparentbal = parent->bal;
+	double oldparentbal = parent->bal;
 	predecessor->pNext = newListedAnimal(newAnimal(parent), predecessor->pNext);
 	avgAdjust(0, WORLD->numAnimals, &WORLD->avgBal, parent->bal-oldparentbal);
 	avgAdjust(1, WORLD->numAnimals, &WORLD->avgBal, predecessor->pNext->pItem->bal); 
@@ -61,15 +61,15 @@ static void croak(ListedAnimal * predecessor) {
 	pree(listedcorpse);
 }
 
-static float rent() { return WORLD->numAnimals < RENTLESS_POP 
+static double rent() { return WORLD->numAnimals < RENTLESS_POP 
 	? 0 : FEE_TURN*(WORLD->numAnimals-RENTLESS_POP);
 }
 
-static float earn() { return randNorm(EARN_MU, EARN_SIGMA); }
+static double earn() { return randNorm(EARN_MU, EARN_SIGMA); }
 
 static int stepAnimal(ListedAnimal * pred, void * extra) { //returns pop difference
 	Animal * subject = pred->pNext->pItem;
-	float changebal = earn() - rent(); //Later depends on animal
+	double changebal = earn() - rent(); //Later depends on animal
 	subject->bal += changebal;
 	avgAdjust(0, WORLD->numAnimals, &WORLD->avgBal, changebal); 
 	if (  subject->bal < 0 || 
@@ -77,7 +77,7 @@ static int stepAnimal(ListedAnimal * pred, void * extra) { //returns pop differe
 			WORLD->numAnimals > PASSOVER_POP && iteration%PASSOVER_FREQ==0 && rand01()<PASSOVER_RATE ) 
 	{ croak(pred); return -1; }
 	else {
-		if (rand01() < subject->code.probReproK0 + (subject->code.probReproK1 + subject->code.probReproK2*subject->bal)*subject->bal ) 
+		if ( rand01() < (subject->code.probReproK0 + (subject->code.probReproK1 + subject->code.probReproK2*subject->bal)*subject->bal)*subject->bal*subject->bal ) 
 		{ reproduce(pred); return 1; }
 		return 0;
 	}

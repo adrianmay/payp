@@ -8,4 +8,4 @@ Here the repro probability has been made a constant evolving property of an anim
 
 AT GIT TAG Expt-003
 
-Now allowed prob of reproduction to be a quadratic in wealth. The constant and linear terms evolved to zero and the quadratic term stabilised. This figures because it wants to be a step function.
+Now allowed prob of reproduction to be a quadratic in wealth. The constant and linear terms evolved to zero and the quadratic term stabilised. This figures because it wants to be a step function. Also introduced regular "passovers" which kill 95% of the population so the culture is exposed to different population levels. Otherwise the evolution of a repro strategy would have been trivial. When we multilpe the quadratic by wealth squared, we see that only the 4th power term survives.
