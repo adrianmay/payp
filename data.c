@@ -27,8 +27,8 @@ static void reproduce(ListedAnimal * predecessor) {
 	TRACE( ("Reproduce\n") )
 	ListedAnimal * listedparent = predecessor->pNext;
 	Animal * parent = listedparent->pItem;
-	float oldparentbal=parent->bal;
-	predecessor->pNext=newListedAnimal(newAnimal(parent), predecessor->pNext);
+	float oldparentbal = parent->bal;
+	predecessor->pNext = newListedAnimal(newAnimal(parent), predecessor->pNext);
 	avgAdjust(0, WORLD->numAnimals, &WORLD->avgBal, parent->bal-oldparentbal);
 	avgAdjust(1, WORLD->numAnimals, &WORLD->avgBal, predecessor->pNext->pItem->bal); 
 	avgAdjust(1, WORLD->numAnimals, &WORLD->avgProbRepro, predecessor->pNext->pItem->code.probRepro); 
@@ -69,7 +69,7 @@ static void stepAnimal(ListedAnimal * pred, void * extra) {
 	if ( subject->bal < 0 || ( rand01() < PROB_ACCIDENT ) ) //Serial killer required to encourage reproduction
 		croak(pred);
 	else {
-		if (rand01() < subject->code.probRepro*subject->bal ) reproduce(pred);
+		if (rand01() < subject->code.probRepro*100 /* *subject->bal */ ) reproduce(pred);
 	}
 }
 

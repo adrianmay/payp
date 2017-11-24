@@ -9,14 +9,14 @@ OBJS := $(addsuffix .o,$(basename $(SRCS)))
 CPPFLAGS ?= $(INC_FLAGS) -g -O0
 LDFLAGS ?= -L/usr/local/lib -lasyncd -lqlibc -pthread -levent -levent_pthreads -lssl -lcrypto -levent_openssl -lmicrohttpd
 
-REPS=25000
+REPS=200
 
 all:	res plot.gnu
 	gnuplot -p plot.gnu
 	gnuplot -p hist.gnu
 
 res:	$(TARGET)
-	rm -f theheap; ./$(TARGET) $(REPS) > res
+	rm -f theheap; ./$(TARGET) $(REPS) | tee res
 
 $(TARGET): $(OBJS)
 	$(CC)  -o $@  $(OBJS) $(LDFLAGS)
@@ -28,12 +28,12 @@ $(TARGET): $(OBJS)
 forwards.hh:	makeforwards.sh tags
 	./makeforwards.sh
 
-tags:	$(SRCS) $(HDRS) heap-in-a-file/persist.c
+tags:	$(SRCS) $(HDRS) heap-in-a-file/persist.c Makefile
 	ctags -R 
 
 heap-in-a-file/persist.c:
 	git clone https://github.com/adrianmay/heap-in-a-file.git
 
 clean:
-	$(RM) $(TARGET) $(OBJS) $(DEPS) forwards.hh core theheap tags res
+	$(RM) $(TARGET) $(OBJS) $(DEPS) forwards.hh core theheap tags res probrepro.hist
 

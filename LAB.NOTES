@@ -1,0 +1,4 @@
+AT GIT COMMIT fdb8998bbb7d54ba413b7749ac38369780111c34 ...
+
+Very simple animals: only characteristic is "randiness", i.e., tendency to reproduce. Reproduction costs a flat fee and then divides the remainder equally between parent and child. It's hard coded that animals are more likely to reproduce when rich, and that memory prices are higher when the population is higher. The result is a reasonably stable population level and a randiness that evolves toward an optimum from a wide range of starting values.
+
