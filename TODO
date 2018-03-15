@@ -1,0 +1,26 @@
+SIMPLE VM:
+
+A player:
+	is like a javascript object, but:
+		values might be queues/stacks by default
+		locations in object named without .. in relative paths but resolution looks for the nearest one, so scoping.
+		basic tyes include the channel end
+	
+	can:
+		make a block of memory, stuff it with code and subscribe it to a channel, providing finance
+		create/finance a channel and learn both ends
+		donate to a player: how is it addressed?
+		listen on a channel if it knows the read end specifying the handler code and bid
+		write to a channel if it knows the write end, then stop (async pi)
+
+Channels:
+	has communicable names for read and write end
+	need to know name in order to write/read
+	multilpe writers unlikely but not forbidden
+	multilpe readers invokes auto-bid system
+	players might make multilpe channels to control bid process personally
+
+Polling:
+	Grab blackboard space: get read and write names
+	Communicate blackboard addresses
+
